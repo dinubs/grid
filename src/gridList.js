@@ -371,6 +371,7 @@ GridList.prototype = {
   },
 
   _updateItemPosition: function(item, position) {
+    console.log('_updateItemPosition');
     if (item.x !== null && item.y !== null) {
       this._deleteItemPositionFromGrid(item);
     }
@@ -402,7 +403,7 @@ GridList.prototype = {
      * Mark the grid cells that are occupied by an item. This prevents items
      * from overlapping in the grid
      */
-
+    console.log('_markItemPositionToGrid');
     var position = this._getItemPosition(item),
         x, y;
 
@@ -445,6 +446,7 @@ GridList.prototype = {
      * Ensure that the grid has at least N columns available.
      */
     var i;
+    console.log(N);
     for (i = 0; i < N; i++) {
       if (!this.grid[i]) {
         this.grid.push(new GridCol(this._options.lanes));
@@ -474,6 +476,7 @@ GridList.prototype = {
   },
 
   _resolveCollisions: function(item) {
+    console.log('_resolveCollisions');
     if (!this._tryToResolveCollisionsLocally(item)) {
       this._pullItemsToLeft(item);
     }
@@ -489,6 +492,7 @@ GridList.prototype = {
      * revert to the initial item positions, we create a virtual grid in the
      * process
      */
+    console.log('_tryToResolveCollisionsLocally');
     var collidingItems = this._getItemsCollidingWithItem(item);
     if (!collidingItems.length) {
       return true;
@@ -667,7 +671,7 @@ GridList.prototype = {
     /**
      * See _getItemPosition.
      */
-
+    console.log('_setItemPosition');
     if (this._options.direction === 'horizontal') {
       item.x = position[0];
       item.y = position[1];

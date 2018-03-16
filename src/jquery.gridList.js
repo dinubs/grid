@@ -77,6 +77,19 @@
       this._applyPositionToItems();
     },
 
+    removeItem: function(element) {
+      const item = this._getItemByElement(element);
+      const $element = item.$element;
+      $element.hide();
+      this._createGridSnapshot();
+      GridList.cloneItems(this._items, this.items);
+      this.gridList.generateGrid();
+      const x = this.items.reduce((max, item) => Math.max(max, item.x), 0)
+      this.gridList.moveItemToPosition(item, [x, 1]);
+      this._updateGridSnapshot();
+      this._applyPositionToItems();
+    },
+
     _bindMethod: function(fn) {
       /**
        * Bind prototype method to instance scope (similar to CoffeeScript's fat
@@ -262,11 +275,6 @@
       }
       // Update the width of the entire grid container with enough room on the
       // right to allow dragging items to the end of the grid.
-      if (this.options.fixedSize) {
-        if (this.options.direction === "horizontal") {
-
-        }
-      }
       if (this.options.direction === "horizontal") {
         this.$element.width(
           (this.gridList.grid.length + this._widestItem) * this._cellWidth);
