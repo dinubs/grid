@@ -1,4 +1,5 @@
 const GridList = require('./gridList');
+const $ = require('jQuery');
 
 var DraggableGridList = function(element, options, draggableOptions) {
   this.options = $.extend({}, this.defaults, options);
