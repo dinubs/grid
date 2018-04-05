@@ -68,19 +68,13 @@ DraggableGridList.prototype = {
     this._applyPositionToItems();
   },
 
-  removeItem: function(element) {
-    var item = this._getItemByElement(element);
-    var $element = item.$element;
-    $element.hide();
+  update: function() {
     this._createGridSnapshot();
     GridList.cloneItems(this._items, this.items);
     this.gridList.generateGrid();
-    var y = this.items.reduce(function (max, i) {
-      return Math.max(max, i.y);
-    }, 0);
-    this.gridList.moveItemToPosition(item, [item.x, y]);
-    this._updateGridSnapshot();
+    this.gridList._pullItemsToLeft();
     this._applyPositionToItems();
+    this._updateGridSnapshot();
   },
 
   _bindMethod: function(fn) {
