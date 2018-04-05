@@ -75,7 +75,8 @@ DraggableGridList.prototype = {
     this._createGridSnapshot();
     GridList.cloneItems(this._items, this.items);
     this.gridList.generateGrid();
-    const y = this.items.reduce((max, item) => Math.max(max, item.y), 0)
+    const y = this.items.reduce((max, i) => Math.max(max, i.y), 0)
+    console.log(y);
     this.gridList.moveItemToPosition(item, [item.x, y]);
     this._updateGridSnapshot();
     this._applyPositionToItems();
