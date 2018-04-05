@@ -1,4 +1,4 @@
-const GridList = require('./gridList');
+var GridList = require('./gridList');
 
 var DraggableGridList = function(element, options, draggableOptions) {
   this.options = $.extend({}, this.defaults, options);
@@ -69,14 +69,15 @@ DraggableGridList.prototype = {
   },
 
   removeItem: function(element) {
-    const item = this._getItemByElement(element);
-    const $element = item.$element;
+    var item = this._getItemByElement(element);
+    var $element = item.$element;
     $element.hide();
     this._createGridSnapshot();
     GridList.cloneItems(this._items, this.items);
     this.gridList.generateGrid();
-    const y = this.items.reduce((max, i) => Math.max(max, i.y), 0)
-    console.log(y);
+    var y = this.items.reduce(function (max, i) {
+      return Math.max(max, i.y);
+    }, 0);
     this.gridList.moveItemToPosition(item, [item.x, y]);
     this._updateGridSnapshot();
     this._applyPositionToItems();
